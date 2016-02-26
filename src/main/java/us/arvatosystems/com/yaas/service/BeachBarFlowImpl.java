@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import us.arvatosystems.com.yaas.domain.Product;
+import us.arvatosystems.com.yaas.helper.Util;
 import us.arvatosystems.com.yaas.service.checkout.OrderService;
 import us.arvatosystems.com.yaas.service.message.IncomingMessageEvent;
 import us.arvatosystems.com.yaas.service.message.OutgoingMessageEvent;
@@ -202,7 +203,7 @@ public class BeachBarFlowImpl implements InitializingBean, BeachBarFlow
 	{
 		try
 		{
-			orderService.placeOrder(ctx.getCurrentOrder(), ctx.customerNo);
+			orderService.placeOrder(ctx.getCurrentOrder(), Util.maskPhoneNo(ctx.customerNo));
 			return true;
 		}
 		catch (final RuntimeException ex)
